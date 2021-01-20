@@ -131,7 +131,7 @@ public class BrowseActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if(options[item].equals("Neueste")){
+                if(options[item].equals("Neueste")){ //sort with ID
                     sortNeueste();
                     adapter = new RecyclerViewAdapter(angebotContainer,BrowseActivity.this, prevActivity);
                     recyclerView.setAdapter(adapter);
@@ -156,37 +156,46 @@ public class BrowseActivity extends AppCompatActivity {
 
     private void sortNeueste(){
         Angebot tempAngebot;
-        for (int i = 0 ; i < angebotContainer.size()-1;i++){
-            if(angebotContainer.get(i).getBeitragID()>angebotContainer.get(i+1).getBeitragID())
-                continue;
-            tempAngebot = angebotContainer.get(i);
-            angebotContainer.set(i,angebotContainer.get(i+1));
-            angebotContainer.set(i+1,tempAngebot);
-            sortNeueste();
+        tempAngebot = angebotContainer.get(0);
+        int n = angebotContainer.size();
+        for (int i = 0 ; i < n ;i++){
+            for(int j=1; j < (n-i); j++){
+                if(angebotContainer.get(j-1).getBeitragID()<angebotContainer.get(j).getBeitragID()){
+                    tempAngebot = angebotContainer.get(j-1);
+                    angebotContainer.set((j-1),angebotContainer.get(j));
+                    angebotContainer.set(j,tempAngebot);
+                }
+            }
         }
     }
 
     private void sortPreisAuf(){
         Angebot tempAngebot;
-        for (int i = 0 ; i < angebotContainer.size()-1;i++){
-            if(Double.compare(angebotContainer.get(i).getPreis(), angebotContainer.get(i+1).getPreis())<0)
-                continue;
-            tempAngebot = angebotContainer.get(i);
-            angebotContainer.set(i,angebotContainer.get(i+1));
-            angebotContainer.set(i+1,tempAngebot);
-            sortPreisAuf();
+        tempAngebot = angebotContainer.get(0);
+        int n = angebotContainer.size();
+        for (int i = 0 ; i < n ;i++){
+            for(int j=1; j < (n-i); j++){
+                if(angebotContainer.get(j-1).getPreis()>angebotContainer.get(j).getPreis()){
+                    tempAngebot = angebotContainer.get(j-1);
+                    angebotContainer.set((j-1),angebotContainer.get(j));
+                    angebotContainer.set(j,tempAngebot);
+                }
+            }
         }
     }
 
     private void sortPreisAb(){
         Angebot tempAngebot;
-        for (int i = 0 ; i < angebotContainer.size()-1;i++){
-            if(Double.compare(angebotContainer.get(i).getPreis(), angebotContainer.get(i+1).getPreis())>0)
-                continue;
-            tempAngebot = angebotContainer.get(i);
-            angebotContainer.set(i,angebotContainer.get(i+1));
-            angebotContainer.set(i+1,tempAngebot);
-            sortPreisAb();
+        tempAngebot = angebotContainer.get(0);
+        int n = angebotContainer.size();
+        for (int i = 0 ; i < n ;i++){
+            for(int j=1; j < (n-i); j++){
+                if(angebotContainer.get(j-1).getPreis()<angebotContainer.get(j).getPreis()){
+                    tempAngebot = angebotContainer.get(j-1);
+                    angebotContainer.set((j-1),angebotContainer.get(j));
+                    angebotContainer.set(j,tempAngebot);
+                }
+            }
         }
     }
 
