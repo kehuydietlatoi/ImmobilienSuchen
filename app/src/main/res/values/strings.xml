@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ImmobilienSuchen</string>
+    <string name="title_activity_makler_acitivity">MaklerAcitivity</string>
+    <string name="title_activity_kunden">KundenActivity</string>
+    <string name="title_activity_neu_angebot">NeuAngebotActivity</string>
+    <string name="title_activity_angebot_verwalten">AngebotVerwaltenActivity</string>
+    <string name="kunden">Kunden</string>
+    <string name="makler">Makler</string>
+    <string name="a">A</string>
+    <string name="neues_angebot_anlegen">Neues Angebot anlegen</string>
+    <string name="angebot_verwalten">Angebot verwalten</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_browse">BrowseActivity</string>
+    <string name="title_activity_angebot">AngebotActivity</string>
+    <string name="titel">Titel</string>
+    <string name="preis">Preis</string>
+    <string name="contact">contact</string>
+    <string name="beschreibung">beschreibung</string>
+    <string name="stadt">Stadt</string>
+    <string name="Titel">Titel</string>
+    <string name="Preis">Preis</string>
+    <string name="email">Email</string>
+    <string name="title_activity_ein_angebot">einAngebotActivity</string>
+    <string name="neues_angebot_erstellen">Neues Angebot Erstellen</string>
+
+
+</resources>
