@@ -8,6 +8,16 @@ import java.util.ArrayList;
 class Angebot implements Parcelable {
 
     private int beitragID, favorit;
+
+    public int getNewNachricht() {
+        return newNachricht;
+    }
+
+    public void setNewNachricht(int newNachricht) {
+        this.newNachricht = newNachricht;
+    }
+
+    private int newNachricht;// 0 false,1 true
     private String art;
     private String stadt;
     private String titel;
@@ -31,6 +41,8 @@ class Angebot implements Parcelable {
         this.images = images;
         this.favorit = favorit;  //0 = false, 1 = true;
         this.nachrichten = nachrichten;
+        if (nachrichten.size() !=0 ) this.newNachricht = 1;
+        else  this.newNachricht = 0;
     }
 
     public Angebot(int BeitragID, String art, String stadt, double preis, String titel, String email, String beschreibung, int favorit, ArrayList<String> images)
@@ -44,6 +56,7 @@ class Angebot implements Parcelable {
         this.email = email;
         this.images = images;
         this.favorit = favorit;  //0 = false, 1 = true;
+        this.newNachricht = 0;
         this.nachrichten = new ArrayList<>();
     }
 
@@ -143,6 +156,7 @@ class Angebot implements Parcelable {
         in.readList(images, String.class.getClassLoader());
         nachrichten = new ArrayList<>();
         in.readList(nachrichten, String.class.getClassLoader());
+        newNachricht = in.readInt();
     }
 
     @Override
@@ -162,6 +176,7 @@ class Angebot implements Parcelable {
         out.writeInt(favorit);
         out.writeList(images);
         out.writeList(nachrichten);
+        out.writeInt(newNachricht);
     }
 
     public static final Parcelable.Creator<Angebot> CREATOR = new Parcelable.Creator<Angebot>() {

@@ -34,7 +34,7 @@ public class AngebotAktualisierenActivity extends AppCompatActivity {
 
 
     @Override
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n") //suppressing warning
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_angebot);
@@ -151,7 +151,7 @@ public class AngebotAktualisierenActivity extends AppCompatActivity {
         mailView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                angebot.setNewNachricht(0);
                 LayoutInflater inflater= LayoutInflater.from(AngebotAktualisierenActivity.this);
                 View view=inflater.inflate(R.layout.nachrichten_list, null);
 

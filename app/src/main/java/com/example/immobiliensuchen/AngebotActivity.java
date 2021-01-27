@@ -120,6 +120,7 @@ public class AngebotActivity extends AppCompatActivity {
                         intentWithResult.putExtra("angebot", angebot);
                         setResult(1, intentWithResult);
                         Toast.makeText(AngebotActivity.this,"Nachricht gesendet", Toast.LENGTH_SHORT).show();
+                        angebot.setNewNachricht(1);
                     }
                 });
 

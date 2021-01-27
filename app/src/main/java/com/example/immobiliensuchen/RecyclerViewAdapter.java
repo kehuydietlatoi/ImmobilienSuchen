@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -45,10 +47,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
+        holder.bindData(position);
         angebot = angebotContainer.get(position);
         holder.image.setImageBitmap(BitmapFactory.decodeFile(pathToPicture + File.separator + angebot.getImages().get(0)));  //first picture in imagesId List
         holder.Titel.setText(angebot.getTitel());
         holder.Preis.setText(Double.toString(angebot.getPreis()));
+        if (angebot.getNewNachricht() == 1){
+            holder.imgView.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.imgView.setVisibility(View.INVISIBLE);
+        }
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +95,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView Titel;
         TextView Preis;
         RelativeLayout parentLayout;
+        ImageView imgView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +103,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Titel = itemView.findViewById(R.id.angebotTitel);
             Preis = itemView.findViewById(R.id.angebotpreis);
             parentLayout = itemView.findViewById(R.id.parentLayout);
+            imgView = itemView.findViewById(R.id.imageView4);
+        }
+
+
+        public void bindData(int position) {
+            if (position % 2 == 0) {
+                int backgroundColor = ContextCompat.getColor(context, R.color.colorVani);
+                itemView.setBackgroundColor(backgroundColor);
+            } else {
+                itemView.setBackgroundColor(Color.LTGRAY);
+            }
         }
     }
 
