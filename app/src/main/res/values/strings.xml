@@ -22,6 +22,6 @@
     <string name="email">Email</string>
     <string name="title_activity_ein_angebot">einAngebotActivity</string>
     <string name="neues_angebot_erstellen">Neues Angebot Erstellen</string>
-
+    <string name="nameAngebot">name Angebot</string>
 
 </resources>

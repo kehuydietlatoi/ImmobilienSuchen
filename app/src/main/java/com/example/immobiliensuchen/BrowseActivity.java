@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,8 +32,9 @@ public class BrowseActivity extends AppCompatActivity {
     private String prevActivity;
 
     private ImageView sortImageView;
-
-
+    private ImageView searchImageView;
+    private String angebotName;
+    private ArrayList<Angebot> searchedAngebot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class BrowseActivity extends AppCompatActivity {
         setTitle(getIntent().getStringExtra("title"));
 
         sortImageView = findViewById(R.id.sort);
+        searchImageView = findViewById(R.id.search);
 
 //      pass variable from KundenActivity or MaklerActivity
         angebotContainer = getIntent().getParcelableArrayListExtra("angebotContainer");
@@ -52,6 +55,22 @@ public class BrowseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sortMenu(BrowseActivity.this);
+            }
+        });
+        searchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText angebotNameText =  findViewById(R.id.searchEditText);
+                angebotName = angebotNameText.getText().toString();
+                if(angebotName.equals("")){
+                    Toast t;
+                    t = Toast.makeText(BrowseActivity.this.getApplicationContext(),
+                            "Search kann nicht leer sein. Bitte etwas eingeben ", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else{
+                    search(BrowseActivity.this);
+                }
             }
         });
     }
@@ -119,6 +138,17 @@ public class BrowseActivity extends AppCompatActivity {
                 setResult(4, intentWithResult);
                 break;
         }
+    }
+    private void search(Context context) {
+        searchedAngebot = new ArrayList<>();
+        for(int i = 0; i < angebotContainer.size(); i++){
+            Angebot a = angebotContainer.get(i);
+            if (a.getTitel().equals(angebotName) ){
+                searchedAngebot.add(a);
+            }
+        }
+        adapter = new RecyclerViewAdapter(searchedAngebot,BrowseActivity.this, prevActivity);
+        recyclerView.setAdapter(adapter);
     }
 
     private void sortMenu(Context context) {
